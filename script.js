@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Smooth Scrolling
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const navLinks = document.querySelectorAll('.nav-links a, .hero a');
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
