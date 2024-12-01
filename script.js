@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     // Smooth Scrolling
     const navLinks = document.querySelectorAll('.nav-links a, .hero a');
@@ -7,42 +6,50 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const targetId = event.target.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            targetElement.scrollIntoView({ behavior: 'smooth' });
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
             
             // Close mobile menu if open
-            document.querySelector('.nav-links').classList.remove('active');
-            document.querySelector('.mobile-menu-toggle').classList.remove('active');
+            const navMenu = document.querySelector('.nav-links');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (navMenu && mobileMenuToggle) {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            }
         });
     });
 
-    // scroll navbar color
-    const navbar = document.querySelector('.navbar'); // Get all nav links
-    // add scroll event listener
+    // Scroll Navbar Color
+    const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) { // if scrolled more than 50px
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled'); // if not scrolled
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         }
     });
 
-
-
-    
     // Mobile Menu Toggle with Animation
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-links');
     
-    mobileMenuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileMenuToggle.classList.toggle('active');
-        
-        // Animate menu toggle icon
-        const spans = mobileMenuToggle.querySelectorAll('span');
-        spans[0].classList.toggle('rotate-45');
-        spans[1].classList.toggle('opacity-0');
-        spans[2].classList.toggle('negative-45');
-    });
+    if (mobileMenuToggle && navMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+            
+            // Animate menu toggle icon
+            const spans = mobileMenuToggle.querySelectorAll('span');
+            spans[0].classList.toggle('rotate-45');
+            spans[1].classList.toggle('opacity-0');
+            spans[2].classList.toggle('negative-45');
+        });
+    }
 
     // Product Quick View Modal
     const productCards = document.querySelectorAll('.product-card');
@@ -58,45 +65,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Contact Platform Handling with Enhanced Tracking
-    const contactLinks = document.querySelectorAll('.contact-social-link, .social-media-icons a');
+    // Contact Platform Handling
+    const contactLinks = document.querySelectorAll('.contact-social-link');
     contactLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             const platform = link.getAttribute('data-platform');
             
-            // Enhanced Contact Handling with Event Tracking
-            gtmTrackSocialClick(platform);
-            
-            switch(platform) {
-                case 'whatsapp':
-                    const message = 'Halo, saya ingin memesan blazer dari Blazer S&R Fashion.';
-                    const phoneNumber = '6282262877872';
-                    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-                    window.open(url, '_blank');
-                    break;
-                
-                case 'instagram':
-                    window.open('https://www.instagram.com/jaenab91?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', '_blank');
-                    break;
-                
-                case 'tiktok':
-                    window.open('https://vt.tokopedia.com/t/ZS2CGV2gW/', '_blank');
-                    break;
-                
-                case 'shopee':
-                    window.open('https://shopee.co.id/snr_fashion1', '_blank');
-                    break;
-            }
+            handleSocialPlatformClick(platform);
         });
     });
 
-    // Newsletter Signup
+    // Social Media Icons in Footer
+    const footerSocialLinks = document.querySelectorAll('.social-media-icons a');
+    footerSocialLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const platform = link.getAttribute('data-platform');
+            
+            handleSocialPlatformClick(platform);
+        });
+    });
+
+    // Newsletter Signup (Placeholder)
+    function setupNewsletterSignup() {
+        console.log('Newsletter signup not implemented');
+    }
     setupNewsletterSignup();
 
     // Lazy Loading for Images
     lazyLoadImages();
 });
+
+// Handle Social Platform Clicks
+function handleSocialPlatformClick(platform) {
+    const platformUrls = {
+        'whatsapp': 'https://wa.me/6282262877872?text=Halo, saya ingin memesan blazer dari Blazer S&R Fashion.',
+        'instagram': 'https://www.instagram.com/jaenab91/',
+        'tiktok': 'https://vt.tokopedia.com/t/ZS2CGV2gW/',
+        'shopee': 'https://shopee.co.id/snr_fashion1'
+    };
+
+    const url = platformUrls[platform];
+    
+    if (url) {
+        // Track GTM event
+        gtmTrackSocialClick(platform);
+        
+        // Open platform link in new tab
+        window.open(url, '_blank');
+    } else {
+        console.warn(`No URL found for platform: ${platform}`);
+    }
+}
 
 // Create Quick View Modal
 function createQuickViewModal() {
@@ -119,36 +140,18 @@ function createQuickViewModal() {
         modal.style.display = 'none';
     });
     
-    // Tambahkan event listener untuk tombol Pesan Sekarang
     modal.querySelector('.order-now').addEventListener('click', () => {
-        // Ambil informasi produk dari modal
         const productTitle = modal.querySelector('.modal-title').textContent;
-        const productImage = modal.querySelector('.modal-image').src;
+        const orderMessage = `Halo, saya tertarik membeli produk: ${productTitle}. Apakah masih tersedia?`;
+        const encodedMessage = encodeURIComponent(orderMessage);
         
-        // Pilih platform pemesanan (misalnya WhatsApp)
-        const whatsappLink = document.querySelector('.contact-social-link.whatsapp');
-        
-        if (whatsappLink) {
-            // Buat pesan default
-            const orderMessage = `Halo, saya tertarik membeli produk: ${productTitle}. Apakah masih tersedia?`;
-            
-            // Enkode pesan untuk URL
-            const encodedMessage = encodeURIComponent(orderMessage);
-            
-            // Buka WhatsApp dengan pesan default
-            // Catatan: Ganti nomor telepon dengan nomor WhatsApp Anda
-            const whatsappUrl = `https://wa.me/6282262877872?text=${encodedMessage}`;
-            
-            // Arahkan ke WhatsApp
-            window.open(whatsappUrl, '_blank');
-        } else {
-            // Fallback jika link WhatsApp tidak ditemukan
-            alert('Maaf, layanan pemesanan sedang tidak tersedia.');
-        }
+        const whatsappUrl = `https://wa.me/6282262877872?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
     });
     
     return modal;
 }
+
 // Open Quick View Modal
 function openQuickViewModal(modal, img, title, description) {
     modal.querySelector('.modal-image').src = img;
@@ -157,14 +160,16 @@ function openQuickViewModal(modal, img, title, description) {
     modal.style.display = 'flex';
 }
 
-// GTM Event Tracking (Placeholder)
+// GTM Event Tracking
 function gtmTrackSocialClick(platform) {
-    // Implement Google Tag Manager tracking
-    console.log(`Social Platform Clicked: ${platform}`);
-    window.dataLayer.push({
-     'event': 'social_platform_click',
-       'platform': platform
-     });
+    if (window.dataLayer) {
+        window.dataLayer.push({
+            'event': 'social_platform_click',
+            'platform': platform
+        });
+    } else {
+        console.warn('Google Tag Manager dataLayer not found');
+    }
 }
 
 // Lazy Loading for Images
