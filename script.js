@@ -15,6 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // scroll navbar color
+    const navbar = document.querySelector('.navbar'); // Get all nav links
+    // add scroll event listener
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) { // if scrolled more than 50px
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled'); // if not scrolled
+        }
+    });
+
+
+
+    
     // Mobile Menu Toggle with Animation
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-links');
