@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle Social Platform Clicks
 function handleSocialPlatformClick(platform) {
     const platformUrls = {
-        'whatsapp': 'https://wa.me/6282262877872?text=Halo, Hai, saya tertarik dengan koleksi blazer dari Blazer S&R Fashion, bagaimana cara memesannya?.',
+        'whatsapp': `https://wa.me/6282262877872?text=${encodeURIComponent('Halo! 🌟 Terima kasih sudah tertarik dengan koleksi blazer Blazer S&R Fashion. Kami siap membantu Anda menemukan blazer impian yang sempurna. Ingin tahu detail lebih lanjut? Mari kita bicara! Salam hangat dari tim kami. 👔✨')}`,
         'instagram': 'https://www.instagram.com/jaenab91/',
         'tiktok': 'https://vt.tokopedia.com/t/ZS2CGV2gW/',
         'shopee': 'https://shopee.co.id/snr_fashion1'
@@ -143,9 +143,7 @@ function createQuickViewModal() {
     modal.querySelector('.order-now').addEventListener('click', () => {
         const productTitle = modal.querySelector('.modal-title').textContent;
         const orderMessage = `Halo, saya tertarik membeli produk: ${productTitle}. Apakah masih tersedia?`;
-        const encodedMessage = encodeURIComponent(orderMessage);
-        
-        const whatsappUrl = `https://wa.me/6282262877872?text=${encodedMessage}`;
+        const whatsappUrl = `https://wa.me/6282262877872?text=${encodeURIComponent(orderMessage)}`;
         window.open(whatsappUrl, '_blank');
     });
     
