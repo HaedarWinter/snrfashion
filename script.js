@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle Social Platform Clicks
 function handleSocialPlatformClick(platform) {
     const platformUrls = {
-        'whatsapp': 'https://wa.me/6282262877872?text=Halo, saya ingin memesan blazer dari Blazer S&R Fashion.',
+        'whatsapp': 'https://wa.me/6282262877872?text=Halo, Hai, saya tertarik dengan koleksi blazer dari Blazer S&R Fashion, bagaimana cara memesannya?.',
         'instagram': 'https://www.instagram.com/jaenab91/',
         'tiktok': 'https://vt.tokopedia.com/t/ZS2CGV2gW/',
         'shopee': 'https://shopee.co.id/snr_fashion1'
