@@ -1,858 +1,185 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+// script.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth Scrolling
+    const navLinks = document.querySelectorAll('.nav-links a, .hero a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = event.target.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            
+            // Close mobile menu if open
+            document.querySelector('.nav-links').classList.remove('active');
+            document.querySelector('.mobile-menu-toggle').classList.remove('active');
+        });
+    });
+
+    // scroll navbar color
+    const navbar = document.querySelector('.navbar'); // Get all nav links
+    // add scroll event listener
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) { // if scrolled more than 50px
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled'); // if not scrolled
+        }
+    });
 
-:root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --text-color: #333;
-    --background-color: #f4f5f6;
-}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
-}
-
-/* Header Styles */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: transparent;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.686);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo-img {
-    width: 50px;
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
-    height: 50px;
-    margin-right: 10px;
-    border-radius: 50%;
-}
-
-.logo a {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-decoration: none;
-    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
-}
-
-nav {
-    display: flex;
-    align-items: center;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-}
-
-.nav-links img {
-    filter: drop-shadow(0 0 1px rgba(255, 33, 177, 0.3));
-}
-
-.nav-links li {
-    margin-left: 1.5rem;
-}
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: bold;
-    position: relative; /* Needed for ::after positioning */
-    transition: color 0.2s ease; /* Smooth color transition */
-  }
-  
-  /* Line Effect (Under Text) */
-  .nav-links a::after {
-    content: ''; /* Creates the line */
-    position: absolute;
-    bottom: -3px; /* Line below the text */
-    left: 0;
-    width: 0%; /* Start with 0 width */
-    height: 2px; /* Line height */
-    background-color: var(--secondary-color); /* Line color */
-    transition: width 0.3s ease; /* Smooth animation */
-    border-radius: 2px;
-  }
-
-
-  
-  /* Hover Effect for Line */
-  .nav-links a:hover::after {
-    width: 100%; /* Expand line to full width */
-  }
-  
-  /* Hover Effect for Text */
-  .nav-links a:hover {
-    color: var(--secondary-color); /* Change text color */
-  }
-  
-  /* Navbar Scrolled Links */
-  .navbar.scrolled .nav-links a {
-    color: var(--secondary-color);
-  }
-  
-  /* Scrolled Hover Effect */
-  .navbar.scrolled .nav-links a:hover {
-    color: rgb(255, 144, 224); /* Change text color on hover */
-  }
-
-.fas fa-shopping-cart {
-    font-size: 5rem;
-    color: var(--primary-color);
-}
-
-.mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.mobile-menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-color);
-    margin: 3px 0;
-    transition: 0.4s;
-}
-
-/* Hero Section */
-.hero {
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    padding: 0 5%;
-    margin-top: 70px;
-    background-color: var(--background-color);
-}
-
-.hero-content {
-    flex: 1;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 2rem;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn {
-    text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: transform 0.3s ease;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-}
-
-.btn:hover {
-    transform: scale(1.05);
-}
-
-.hero-image {
-    flex: 1;
-    text-align: center;
-}
-
-.hero-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.nav-links img {
-    width: 26px;
-    height: 26px;
-    margin-right: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Products Section */
-.products {
-    padding: 5rem 5%;
-    background-color: white;
-}
-
-.products h2 {
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--primary-color);
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-.product-card {
-    background-color: var(--background-color);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-    transform: scale(1.05);
-}
-
-.product-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.product-card h3, .product-card p {
-    padding: 1rem;
-    text-align: center;
-}
-
-/* Contact Section */
-.contact {
-    padding: 5rem 5%;
-    gap: 1rem; /* Consistent gap */
-}
-
-.contact h2 {
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--primary-color);
-}
-
-.contact-social-links {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for contact links */
-}
-
-.contact-social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    text-decoration: none;
-    color: white;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
-}
-
-.contact-social-link i {
-    margin-right: 0.5rem;
-    font-size: 1.5rem;
-}
-
-.contact-social-link.whatsapp { background-color: #25D366; }
-.contact-social-link.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-.contact-social-link.tiktok {background:#000000;}
-.contact-social-link.shopee { background-color: #FF5722; }
-.contact-social-link:hover {transform: scale(1.05);}
-.contact-social-link.whatsapp:hover { 
-    background-color: #25D366;
-    box-shadow: 0 0 10px rgba(37, 211, 102, 0.6); /* Green glow */
-}
-
-.contact-social-link.instagram:hover { 
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    box-shadow: 0 0 10px rgba(188, 24, 136, 0.6); /* Purple-pink glow */
-}
-
-.contact-social-link.tiktok:hover {
-    background: #000000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); /* Black glow */
-}
-
-.contact-social-link.shopee:hover { 
-    background-color: #FF5722;
-    box-shadow: 0 0 10px rgba(255, 87, 34, 0.6); /* Orange glow */
-}
-
-
-/* Footer */
-footer {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 3rem 10%;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.footer-logo img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-bottom: 0.5rem;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.banner img {
-    max-width: 10%;
-    height: auto;
-    z-index: -1;
-    border-radius: 10px;
-}
-
-.footer-links a {
-    color: white;
-    text-decoration: none;
-    margin-right: 1rem;
-}
-
-.social-media-icons a {
-    color: white;
-    font-size: 1.5rem;
-    margin-right: 1rem;
-    text-decoration: none;
-}
-
-
-.contact-social-links-footer {
-    display: flex;
-    gap: 2rem;
-    padding: 5%;
-    gap: 1rem; /* Consistent gap */
-
-}
-
-.copyright .banner img {
-    max-width: 10%;
-    height: auto;
-    z-index: -1;
-    border-radius: 10px;
-}
-.copyright {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Responsive Design */
-/* Update the existing mobile media query with improved spacing */
-@media (max-width: 768px) {
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 1rem 5%;
-    }
-
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: white;
-        flex-direction: column;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 1rem 0; /* Added padding to prevent items from touching edges */
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links li {
-        margin: 0.75rem 0;
-        text-align: center;
-        padding: 0 1rem; /* Added horizontal padding */
-    }
-
-    .mobile-menu-toggle {
-        display: flex;
-    }
-
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 2rem 5%; /* Adjusted padding */
-        margin-top: 60px; /* Slightly reduced top margin */
-    }
-
-    .hero-content, .hero-image {
-        flex: none;
-        width: 100%;
-        margin-bottom: 1.5rem; /* Added margin between hero content and image */
-    }
-
-    .hero h1 {
-        font-size: 2.2rem; /* Slightly reduced font size for mobile */
-    }
-
-    .hero p {
-        font-size: 1rem; /* Reduced paragraph font size */
-    }
-
-    .cta-buttons {
-        justify-content: center;
-        flex-direction: column; /* Stack buttons vertically on mobile */
-        gap: 1rem; /* Space between stacked buttons */
-    }
-
-    .btn {
-        width: 100%; /* Full-width buttons */
-        text-align: center;
-    }
-
-    .products {
-        padding: 3rem 5%; /* Reduced padding */
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem; /* Reduced gap between product cards */
-    }
-
-    .product-card {
-        margin-bottom: 1rem; /* Added margin between cards */
-    }
-
-    .contact {
-        padding: 3rem 5%; /* Reduced padding */
-    }
-
-    .contact-social-links {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for contact links */
-        gap: 1rem; /* Consistent gap */
-    }
-
-    .contact-social-link {
-        padding: 0.75rem; /* Slightly reduced padding */
-        margin-bottom: 0.5rem; /* Added margin between links */
-    }
-
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem; /* Added gap between footer sections */
-    }
-
-    .footer-links {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem; /* Space between footer links */
-    }
-
-    .footer-links a {
-        margin: 0;
-        padding: 0.5rem; /* Added padding to increase tap target */
-    }
-
-    .social-media-icons {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem; /* Space between social media icons */
-    }
-}
-
-
-/* Kontak Kami Section */
-.kontak-kami {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    margin-top: 2rem;
-    padding: 5rem 5%;
-    background-image: url('img/Blazer.svg');
-    background-image: radial-gradient(rgba(0, 0, 0, 0.169), rgba(0, 0, 0, 0.5)), url('img/Blazer.svg');
-    background-size: cover; /* Makes the image cover the full area */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    margin: 0; /* Removes default margin */
-    gap: 1.5rem;
-}
-.kontak-kami {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    margin-top: 2rem;
-    padding: 5rem 5%;
-    background-image: radial-gradient(rgba(0, 0, 0, 0.169), rgba(0, 0, 0, 0.5)), url('img/Blazer.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 0;
-    gap: 1.5rem;
-}
-
-.separator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px; /* Jarak antara teks dan garis */
-  }
-  
-  .separator span {
-    font-size: 50px; /* Ukuran font untuk h1 */
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-  }
-  
-  .separator::before,
-  .separator::after {
-    content: '';
-    flex-grow: 1; /* Membuat garis fleksibel */
-    height: 3px; /* Ketebalan garis */
-    background-color: rgb(255, 255, 255); /* Warna garis */
-    margin: 0 10px; /* Jarak garis ke teks */
-  }
-
-.kontak-kami .card {
-    width: 50%;
-    border-radius: 10px;
-    padding: 2rem;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.5s ease-in-out;
-    justify-content: space-between;
-    border: 1px solid #e0e0e0;
-}
-
-.kontak-kami .card img.platform-logo {
-    max-width: 150px;
-    margin: 2.5rem auto;
-    display: block;
-    border-radius: 0.5rem;
-    border: 1px solid #ff65ad;
-}
-
-.kontak-kami .card h3 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s ease-in-out;
-    gap: 0.75rem;
-    font-size: 1.2rem;
-}
-
-.kontak-kami .card h3 i {
-    font-size: 2rem;
-}
-
-.kontak-kami .card ol {
-    list-style-position: inside;
-    padding: 0;
-    text-align: left;
-}
-
-.kontak-kami .card ol li {
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
-}
-
-.kontak-kami .card:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-    background: transparent;
-    transition: all 0.3s ease-in-out;
-    backdrop-filter: blur(10px);
-}
-
-.kontak-kami .card:hover h3 {
-    transition: all 0.1s ease-in-out;
-    color: #ffffff;
-}
-
-.kontak-kami .tiktok-h3:hover {
-    color: #000000;
-}
-
-.kontak-kami .whatsapp-h3:hover {
-    color: #25D366;
     
+    // Mobile Menu Toggle with Animation
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-links');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+        
+        // Animate menu toggle icon
+        const spans = mobileMenuToggle.querySelectorAll('span');
+        spans[0].classList.toggle('rotate-45');
+        spans[1].classList.toggle('opacity-0');
+        spans[2].classList.toggle('negative-45');
+    });
+
+    // Product Quick View Modal
+    const productCards = document.querySelectorAll('.product-card');
+    const modal = createQuickViewModal();
+    
+    productCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const img = card.querySelector('img').src;
+            const title = card.querySelector('h3').textContent;
+            const description = card.querySelector('p').textContent;
+            
+            openQuickViewModal(modal, img, title, description);
+        });
+    });
+
+    
+    // Contact Platform Handling
+    const contactLinks = document.querySelectorAll('.contact-social-link');
+    contactLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const platform = link.getAttribute('data-platform');
+            
+            switch(platform) {
+                case 'whatsapp':
+                    const whatsappUrl = `https://wa.me/6282262877872?text=Halo, saya ingin memesan blazer dari Blazer S&R Fashion.`;
+                    window.open(whatsappUrl, '_blank');
+                    break;
+                case 'instagram':
+                    window.open('https://www.instagram.com/jaenab91/', '_blank');
+                    break;
+                case 'tiktok':
+                    window.open('https://vt.tokopedia.com/t/ZS2CGV2gW/', '_blank');
+                    break;
+                case 'shopee':
+                    window.open('https://shopee.co.id/snr_fashion1', '_blank');
+                    break;
+            }
+        });
+    });
+
+
+    // Newsletter Signup
+    setupNewsletterSignup();
+
+    // Lazy Loading for Images
+    lazyLoadImages();
+});
+
+// Create Quick View Modal
+function createQuickViewModal() {
+    const modal = document.createElement('div');
+    modal.classList.add('quick-view-modal');
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="" alt="Product Image" class="modal-image">
+            <div class="modal-details">
+                <h2 class="modal-title"></h2>
+                <p class="modal-description"></p>
+                <button class="btn btn-primary order-now">Pesan Sekarang</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    // Tambahkan event listener untuk tombol Pesan Sekarang
+    modal.querySelector('.order-now').addEventListener('click', () => {
+        // Ambil informasi produk dari modal
+        const productTitle = modal.querySelector('.modal-title').textContent;
+        const productImage = modal.querySelector('.modal-image').src;
+        
+        // Pilih platform pemesanan (misalnya WhatsApp)
+        const whatsappLink = document.querySelector('.contact-social-link.whatsapp');
+        
+        if (whatsappLink) {
+            // Buat pesan default
+            const orderMessage = `Halo, saya tertarik membeli produk: ${productTitle}. Apakah masih tersedia?`;
+            
+            // Enkode pesan untuk URL
+            const encodedMessage = encodeURIComponent(orderMessage);
+            
+            // Buka WhatsApp dengan pesan default
+            // Catatan: Ganti nomor telepon dengan nomor WhatsApp Anda
+            const whatsappUrl = `https://wa.me/6282262877872?text=${encodedMessage}`;
+            
+            // Arahkan ke WhatsApp
+            window.open(whatsappUrl, '_blank');
+        } else {
+            // Fallback jika link WhatsApp tidak ditemukan
+            alert('Maaf, layanan pemesanan sedang tidak tersedia.');
+        }
+    });
+    
+    return modal;
+}
+// Open Quick View Modal
+function openQuickViewModal(modal, img, title, description) {
+    modal.querySelector('.modal-image').src = img;
+    modal.querySelector('.modal-title').textContent = title;
+    modal.querySelector('.modal-description').textContent = description;
+    modal.style.display = 'flex';
 }
 
-.kontak-kami .shopee-h3:hover {
-    color: #FF5722;
+// GTM Event Tracking (Placeholder)
+function gtmTrackSocialClick(platform) {
+    // Implement Google Tag Manager tracking
+    console.log(`Social Platform Clicked: ${platform}`);
+    window.dataLayer.push({
+     'event': 'social_platform_click',
+       'platform': platform
+     });
 }
 
-.kontak-kami .card:hover {
-    transform: scale(1.05);
-}
+// Lazy Loading for Images
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        let imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    let image = entry.target;
+                    image.src = image.dataset.src;
+                    image.classList.add('fade-in');
+                    observer.unobserve(image);
+                }
+            });
+        }, {
+            rootMargin: "50px"
+        });
 
-.kontak-kami .card:hover .instagram-h3 {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .kontak-kami {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1rem;
-    }
-
-    .kontak-kami .card {
-        width: 100%;
-        margin-bottom: 0;
-        padding: 1.5rem;
-    }
-
-    .kontak-kami .card h3 {
-        flex-direction: column;
-        gap: 0.5rem;
-        font-size: 1rem;
-    }
-
-    .kontak-kami .card h3 i {
-        font-size: 1.8rem;
-    }
-
-    .kontak-kami .card ol li {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .kontak-kami .card {
-        padding: 1.25rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .kontak-kami .card h3 {
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-
-    .kontak-kami .card ol li {
-        font-size: 0.85rem;
-        margin-bottom: 0.5rem;
-    }
-}
-
-/* Order Instructions Section */
-.order-instructions {
-    padding: 5rem 5%;
-    background-color: var(--background-color);
-}
-
-.order-instructions h2 {
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--primary-color);
-}
-
-.order-platforms {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
-
-.platform-card {
-    background: transparent;
-    backdrop-filter: blur(5px);
-    border-radius: 10px;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    border: 1px solid #e0e0e0;
-}
-
-.platform-card:hover {
-    transform: scale(1.05);
-}
-
-.platform-card img.platform-logo {
-    max-width: 150px;
-    margin: 2.5rem auto;
-    display: block;
-    border-radius: 0.5rem;
-    border: 1px solid #ff65ad;
-}
-
-.platform-card h3 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.platform-card h3 i {
-    font-size: 2rem;
-}
-
-.platform-card ol {
-    list-style-position: inside;
-    padding: 0;
-}
-
-.platform-card h3, .platform-card ol {
-    text-align: center;
-}
-
-.platform-card ol li {
-    margin-bottom: 0.75rem;
-    text-align: left;
-    font-size: 0.95rem;
-}
-
-@media (max-width: 768px) {
-    .order-platforms {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .order-platforms {
-        grid-template-columns: 1fr;
-    }
-
-    .platform-card {
-        padding: 1.5rem 1rem;
-    }
-
-    .platform-card h3 {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    .platform-card ol li {
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
+        images.forEach(image => imageObserver.observe(image));
     }
 }
 
-/* Mobile Menu Toggle Animation */
-.mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Quick View Modal */
-.quick-view-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 2rem;
-    cursor: pointer;
-}
-
-.modal-image {
-    max-width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.modal-details {
-    text-align: center;
-}
-
-.modal-details h2 {
-    margin-bottom: 1rem;
-}
-
-.modal-details p {
-    margin-bottom: 1.5rem;
-}
-
-
-/* Lazy Load Image Fade In */
-img.fade-in {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-img.fade-in.loaded {
-    opacity: 1;
-}
