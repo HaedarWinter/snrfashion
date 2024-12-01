@@ -75,17 +75,48 @@ nav {
 .nav-links li {
     margin-left: 1.5rem;
 }
-
 .nav-links a {
     text-decoration: none;
     color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
+    font-weight: bold;
+    position: relative; /* Needed for ::after positioning */
+    transition: color 0.2s ease; /* Smooth color transition */
+  }
+  
+  /* Line Effect (Under Text) */
+  .nav-links a::after {
+    content: ''; /* Creates the line */
+    position: absolute;
+    bottom: -3px; /* Line below the text */
+    left: 0;
+    width: 0%; /* Start with 0 width */
+    height: 2px; /* Line height */
+    background-color: var(--secondary-color); /* Line color */
+    transition: width 0.3s ease; /* Smooth animation */
+    border-radius: 2px;
+  }
 
-.nav-links a:hover {
+
+  
+  /* Hover Effect for Line */
+  .nav-links a:hover::after {
+    width: 100%; /* Expand line to full width */
+  }
+  
+  /* Hover Effect for Text */
+  .nav-links a:hover {
+    color: var(--secondary-color); /* Change text color */
+  }
+  
+  /* Navbar Scrolled Links */
+  .navbar.scrolled .nav-links a {
     color: var(--secondary-color);
-}
+  }
+  
+  /* Scrolled Hover Effect */
+  .navbar.scrolled .nav-links a:hover {
+    color: rgb(255, 144, 224); /* Change text color on hover */
+  }
 
 .fas fa-shopping-cart {
     font-size: 5rem;
@@ -463,6 +494,188 @@ footer {
     }
 }
 
+
+/* Kontak Kami Section */
+.kontak-kami {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 2rem;
+    padding: 5rem 5%;
+    background-image: url('img/Blazer.svg');
+    background-image: radial-gradient(rgba(0, 0, 0, 0.169), rgba(0, 0, 0, 0.5)), url('img/Blazer.svg');
+    background-size: cover; /* Makes the image cover the full area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    margin: 0; /* Removes default margin */
+    gap: 1.5rem;
+}
+.kontak-kami {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 2rem;
+    padding: 5rem 5%;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.169), rgba(0, 0, 0, 0.5)), url('img/Blazer.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    gap: 1.5rem;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Jarak antara teks dan garis */
+  }
+  
+  .separator span {
+    font-size: 50px; /* Ukuran font untuk h1 */
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+  }
+  
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex-grow: 1; /* Membuat garis fleksibel */
+    height: 3px; /* Ketebalan garis */
+    background-color: rgb(255, 255, 255); /* Warna garis */
+    margin: 0 10px; /* Jarak garis ke teks */
+  }
+
+.kontak-kami .card {
+    width: 50%;
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s ease-in-out;
+    justify-content: space-between;
+    border: 1px solid #e0e0e0;
+}
+
+.kontak-kami .card img.platform-logo {
+    max-width: 150px;
+    margin: 2.5rem auto;
+    display: block;
+    border-radius: 0.5rem;
+    border: 1px solid #ff65ad;
+}
+
+.kontak-kami .card h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+}
+
+.kontak-kami .card h3 i {
+    font-size: 2rem;
+}
+
+.kontak-kami .card ol {
+    list-style-position: inside;
+    padding: 0;
+    text-align: left;
+}
+
+.kontak-kami .card ol li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.kontak-kami .card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(10px);
+}
+
+.kontak-kami .card:hover h3 {
+    transition: all 0.1s ease-in-out;
+    color: #ffffff;
+}
+
+.kontak-kami .tiktok-h3:hover {
+    color: #000000;
+}
+
+.kontak-kami .whatsapp-h3:hover {
+    color: #25D366;
+    
+}
+
+.kontak-kami .shopee-h3:hover {
+    color: #FF5722;
+}
+
+.kontak-kami .card:hover {
+    transform: scale(1.05);
+}
+
+.kontak-kami .card:hover .instagram-h3 {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .kontak-kami {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .kontak-kami .card {
+        width: 100%;
+        margin-bottom: 0;
+        padding: 1.5rem;
+    }
+
+    .kontak-kami .card h3 {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .kontak-kami .card h3 i {
+        font-size: 1.8rem;
+    }
+
+    .kontak-kami .card ol li {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .kontak-kami .card {
+        padding: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .kontak-kami .card h3 {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .kontak-kami .card ol li {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
 /* Order Instructions Section */
 .order-instructions {
     padding: 5rem 5%;
@@ -482,7 +695,8 @@ footer {
 }
 
 .platform-card {
-    background-color: var(--background-color);
+    background: transparent;
+    backdrop-filter: blur(5px);
     border-radius: 10px;
     padding: 2rem 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -498,6 +712,14 @@ footer {
 
 .platform-card:hover {
     transform: scale(1.05);
+}
+
+.platform-card img.platform-logo {
+    max-width: 150px;
+    margin: 2.5rem auto;
+    display: block;
+    border-radius: 0.5rem;
+    border: 1px solid #ff65ad;
 }
 
 .platform-card h3 {
@@ -517,6 +739,7 @@ footer {
     list-style-position: inside;
     padding: 0;
 }
+
 .platform-card h3, .platform-card ol {
     text-align: center;
 }
@@ -524,85 +747,31 @@ footer {
 .platform-card ol li {
     margin-bottom: 0.75rem;
     text-align: left;
+    font-size: 0.95rem;
 }
 
-/* Responsive Design for Order Instructions */
 @media (max-width: 768px) {
-    .order-instructions {
-        padding: 3rem 5%;
-    }
-
     .order-platforms {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    .contact-social-links-footer{
-        display: grid;
-        justify-content: center;
-        align-items: center;
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for contact links */
+@media (max-width: 480px) {
+    .order-platforms {
+        grid-template-columns: 1fr;
     }
 
     .platform-card {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
+        padding: 1.5rem 1rem;
     }
 
     .platform-card h3 {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .platform-card h3 i {
-        font-size: 1.8rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 
     .platform-card ol li {
-        font-size: 0.95rem;
-    }
-}
-
-/* Additional Mobile Responsiveness */
-@media (max-width: 480px) {
-    .order-platforms {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .platform-card {
-        margin-bottom: 1rem;
-    }
-    .contact-social-links-footer{
-        display: grid;
-        justify-content: center;
-        align-items: center;
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for contact links */
-    }
-}
-
-.platform-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    
-}
-
-/* Additional Mobile and Feature Styles */
-@media (max-width: 480px) {
-    .platform-card {
-        padding: 1rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .platform-card h3 {
         font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-
-    .platform-card ol li {
-        font-size: 0.8rem;
         margin-bottom: 0.5rem;
     }
 }
@@ -676,44 +845,6 @@ footer {
     margin-bottom: 1.5rem;
 }
 
-/* Newsletter Signup */
-.newsletter-signup {
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    border-radius: 10px;
-}
-
-.newsletter-container {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.newsletter-signup h3 {
-    margin-bottom: 1rem;
-}
-
-.newsletter-signup p {
-    margin-bottom: 1.5rem;
-}
-
-#newsletter-form {
-    display: flex;
-    gap: 1rem;
-}
-
-#newsletter-form input {
-    flex-grow: 1;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-}
-
-#newsletter-form button {
-    white-space: nowrap;
-}
 
 /* Lazy Load Image Fade In */
 img.fade-in {
@@ -723,15 +854,4 @@ img.fade-in {
 
 img.fade-in.loaded {
     opacity: 1;
-}
-
-@media (max-width: 480px) {
-    #newsletter-form {
-        flex-direction: column;
-    }
-
-    #newsletter-form input,
-    #newsletter-form button {
-        width: 100%;
-    }
 }
