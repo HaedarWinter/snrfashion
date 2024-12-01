@@ -98,9 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Handle Social Platform Clicks
+// Handle Social Platform Clicks
 function handleSocialPlatformClick(platform) {
     const platformUrls = {
-        'whatsapp': `https://wa.me/6282262877872?text=${encodeURIComponent('Halo! 🌟 Terima kasih sudah tertarik dengan koleksi blazer Blazer S&R Fashion. Kami siap membantu Anda menemukan blazer impian yang sempurna. Ingin tahu detail lebih lanjut? Mari kita bicara! Salam hangat dari tim kami. 👔✨')}`,
+        'whatsapp': `https://wa.me/6282262877872?text=Hello%20kak%21%0ATerima%20kasih%20sudah%20menghubungi%20Blazer%20S%26R%20Fashion%21%0APerkenalkan%2C%20saya%20Tim%20Customer%20Service%20kami.%20Ada%20yang%20bisa%20saya%20bantu%3F%20Kami%20siap%20memberikan%20pelayanan%20terbaik%20untuk%20koleksi%20blazer%20impian%20Anda%21`,
         'instagram': 'https://www.instagram.com/jaenab91/',
         'tiktok': 'https://vt.tokopedia.com/t/ZS2CGV2gW/',
         'shopee': 'https://shopee.co.id/snr_fashion1'
